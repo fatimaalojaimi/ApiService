@@ -35,7 +35,7 @@ jobs:
     #   run: ls -l target/*.war
 
     - name: Rename
-      run: sed -i "s/test123456/${{github.run_number}}/g" ./pom.xml
+      run: sed -i "s/test123456/${{github.run_number}}/g" pom.xml
 
     - name: Build the Code
       run: ./mvnw package 
@@ -46,7 +46,7 @@ jobs:
     - name: Deploy the Build to Tomcat
       uses: mdallasanta/ssh-scp-deploy@v1.2.0
       with:
-        local: "./target/${{github.run_number}}.war"                                               
+        local: "./target/apiservice-${{github.run_number}}.war"                                               
         remote: 'C:\Program Files\Apache Software Foundation\Tomcat 10.0\webapps\'                                               
         host: ${{secrets.HOST}}                                  
         user: ${{secrets.USER}}
