@@ -51,7 +51,7 @@ jobs:
         path: ./target/apiservice-${{github.run_number}}.war
 
     - name: ls
-      run: ls/target 
+      run: ls -l target 
 
 
   deployment-springboot-app:
