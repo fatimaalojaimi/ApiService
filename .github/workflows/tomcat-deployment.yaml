@@ -32,7 +32,7 @@ jobs:
       run: ./mvnw package 
 
     - name: Rename WAR file
-      run: mv ./target/apiservice-0.0.1-SNAPSHOT.war ./target/${{github.run_number}}.war
+      run: mv ./target/apiservice-0.0.1-SNAPSHOT.war ./target/apiservice-v${{github.run_number}}.war
     
     - name: Verify renamed
       run: ls -l target/*.war
@@ -43,7 +43,7 @@ jobs:
     - name: Deploy the Build to Tomcat
       uses: mdallasanta/ssh-scp-deploy@v1.2.0
       with:
-        local: "./target/${{github.run_number}}.war"                                               
+        local: "./target/apiservice-v${{github.run_number}}.war"                                               
         remote: 'C:\Program Files\Apache Software Foundation\Tomcat 10.0\webapps\'                                               
         host: ${{secrets.HOST}}                                  
         user: ${{secrets.USER}}
