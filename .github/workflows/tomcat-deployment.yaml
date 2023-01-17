@@ -44,6 +44,16 @@ jobs:
       run: ls -l target/*.war
 
 
+    - name: upload
+      uses: actions/upload-artifact@v2
+        with:
+          name: apiservice-${{github.run_number}}.war
+          path: ./target/apiservice-${{github.run_number}}.war
+
+    - name: ls
+      run: ls 
+
+
   deployment-springboot-app:
     name: deploy Springboot Application
     runs-on: ubuntu-latest
