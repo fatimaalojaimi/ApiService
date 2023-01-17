@@ -35,7 +35,7 @@ jobs:
     #   run: ls -l target/*.war
 
     - name: Rename
-      run: sed "s/test123456/${{github.run_number}}/g" ./pom.xml
+      run: sed -i "s/test123456/${{github.run_number}}/g" ./pom.xml
 
     - name: Build the Code
       run: ./mvnw package 
