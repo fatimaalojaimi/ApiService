@@ -51,7 +51,7 @@ jobs:
         path: ./target/apiservice-${{github.run_number}}.war
 
     - name: ls
-      run: ls 
+      run: ls/target 
 
 
   deployment-springboot-app:
@@ -60,8 +60,11 @@ jobs:
     needs: build-springboot-app
     steps:
     
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v2
+    - name : up
+    uses: actions/checkout@v2
+
+    - name : up
+    uses: actions/download-artifact@v2
       with:
         name: apiservice-${{github.run_number}}.war
 
