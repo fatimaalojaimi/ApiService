@@ -31,6 +31,12 @@ jobs:
     - name: Build the Code
       run: ./mvnw package 
 
+    - name: Rename WAR file
+      run: mv ./target/demo-0.0.1-SNAPSHOT.war ./target/"${GITHUB_RUN_NUMBER}".war
+    
+    - name: Verify renamed
+      run: ls -l target/*.war
+
     - name: Verify the Build is Created or Not
       run: ls -l target/*.war
 
