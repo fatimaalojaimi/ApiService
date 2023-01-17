@@ -28,9 +28,6 @@ jobs:
     - name: Fix Permission Error
       run: chmod +x mvnw 
 
-    - name: Build the Code
-      run: ./mvnw package 
-
     # - name: Rename WAR file
     #   run: mv ./target/apiservice-0.0.1-SNAPSHOT.war ./target/apiservice-v${{github.run_number}}.war
     
@@ -40,25 +37,24 @@ jobs:
     - name: Rename
       run: sed "s/test123456/${{github.run_number}}/g" ./pom.xml
 
-    - name: Verify snapshot renamed
-      run: ls -l target/*.war
-
+    - name: Build the Code
+      run: ./mvnw package 
 
     - name: Verify the Build is Created or Not
       run: ls -l target/*.war
 
-    # - name: Deploy the Build to Tomcat
-    #   uses: mdallasanta/ssh-scp-deploy@v1.2.0
-    #   with:
-    #     local: "./target/apiservice-v${{github.run_number}}.war"                                               
-    #     remote: 'C:\Program Files\Apache Software Foundation\Tomcat 10.0\webapps\'                                               
-    #     host: ${{secrets.HOST}}                                  
-    #     user: ${{secrets.USER}}
-    #     password: ${{secrets.PASSWORD}}
-    #     pre_upload: echo "This will be executed before the upload!"
-    #     post_upload: echo "This will be executed after the upload!"
-    #     ssh_options: -o StrictHostKeyChecking=no
-    #     scp_options: -v
+    - name: Deploy the Build to Tomcat
+      uses: mdallasanta/ssh-scp-deploy@v1.2.0
+      with:
+        local: "./target/apiservice-v${{github.run_number}}.war"                                               
+        remote: 'C:\Program Files\Apache Software Foundation\Tomcat 10.0\webapps\'                                               
+        host: ${{secrets.HOST}}                                  
+        user: ${{secrets.USER}}
+        password: ${{secrets.PASSWORD}}
+        pre_upload: echo "This will be executed before the upload!"
+        post_upload: echo "This will be executed after the upload!"
+        ssh_options: -o StrictHostKeyChecking=no
+        scp_options: -v
 
         # ploo
 
