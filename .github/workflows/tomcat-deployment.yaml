@@ -81,7 +81,7 @@ jobs:
 
 
   verify-springboot-app:
-    name: deploy Springboot Application
+    name: verify Springboot Application
     runs-on: ubuntu-latest
     needs: build-springboot-app
     steps:
@@ -89,7 +89,7 @@ jobs:
       uses: jtalk/url-health-check-action@v3
       with:
       # Check the following URLs one by one sequentially
-        url: "localhost:8080/apiservice-${{github.run_number}}.war/actuator/health"
+        url: "${{secrets.HOST}}/apiservice-${{github.run_number}}.war/actuator/health"
 
 
 
