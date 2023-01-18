@@ -81,9 +81,9 @@ jobs:
 
 
     - management:
-      endpoint:
-        health:
-          show-details: always
+        endpoint:
+          health:
+            show-details: always
 
       
 
