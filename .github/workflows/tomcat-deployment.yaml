@@ -79,17 +79,23 @@ jobs:
         ssh_options: -o StrictHostKeyChecking=no
         scp_options: -v
 
-
-  verify-springboot-app:
-    name: verify Springboot Application
-    runs-on: ubuntu-latest
-    needs: build-springboot-app
-    steps:
     - name: Check the deployed service URL
       uses: jtalk/url-health-check-action@v3
       with:
       # Check the following URLs one by one sequentially
         url: "${{secrets.HOST}}/apiservice-${{github.run_number}}.war/actuator/health"
+
+
+  # verify-springboot-app:
+  #   name: verify Springboot Application
+  #   runs-on: ubuntu-latest
+  #   needs: build-springboot-app
+  #   steps:
+  #   - name: Check the deployed service URL
+  #     uses: jtalk/url-health-check-action@v3
+  #     with:
+  #     # Check the following URLs one by one sequentially
+  #       url: "${{secrets.HOST}}/apiservice-${{github.run_number}}.war/actuator/health"
 
 
 
