@@ -80,7 +80,7 @@ jobs:
         scp_options: -v
 
 
-    management:
+    - management:
       endpoint:
         health:
           show-details: always
